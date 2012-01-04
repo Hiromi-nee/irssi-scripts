@@ -3,9 +3,7 @@ Couple of irssi scripts
 	- Random chooser script
 	- Usage: !choose option1, option2, optionN
 	- Add channels in the script
-- quadeq.pl
-	- Solves quadratic equations
-	- Usage: !shiroquad a, b, c
+
 
 For suggestions and queries, email hiromi[at]neesan[dot]org
 or contact Hiromi in #isoani on irc.rizon.net
