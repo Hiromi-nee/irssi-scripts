@@ -25,25 +25,27 @@ sub choice{
 
 	#change trigger below
   if(grep(/^$target$/, @channels)){
+        if($msg =~ /^!order/ ){
+          $msg =~ s/!order //;
+          $msg=~ s/\s//g;
+          my @things = split(',', $msg);
+          #shuffle the order of the choices
+          my $response = join(', ', shuffle(@things));
+          #output
+          $server->command('msg '.$target.' '.$nick.' : '.$response.'!');
+        }
         if($msg =~ /^!choose/ ){
                 $msg =~ s/!choose //;
-                
+                $msg =~ s/\s//g; #remove extra whitespace
                 #arguments passed in as one whole string, separate them by commas and store in array
                 my @choices = split(',', $msg);
                 my $range = @choices;
-                my @fch; #final choices
-
-                #clean up extra space
-                foreach my $ch(@choices){
-                        $ch =~ s/^ //;
-                        push(@fch, $ch);
-                }
                 #randomly choose a choice
                 my $random = int(rand($range)) + 0;
                 #output
-                $server->command('msg '.$target.' '.$nick.' : '.$fch[$random].'!');
-                }
-                }
+                $server->command('msg '.$target.' '.$nick.' : '.$choices[$random].'!');
+        }
+  }
 }
 
 
