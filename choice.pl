@@ -27,23 +27,31 @@ sub choice{
   if(grep(/^$target$/, @channels)){
         if($msg =~ /^!order/ ){
           $msg =~ s/!order //;
-          $msg=~ s/\s//g;
           my @things = split(',', $msg);
+          my @fch;
+          foreach my $ch (@things){
+            $ch =~ s/^ //;
+            push ($ch, @fch);
+          }
           #shuffle the order of the choices
-          my $response = join(', ', shuffle(@things));
+          my $response = join(', ', shuffle(@fch));
           #output
           $server->command('msg '.$target.' '.$nick.' : '.$response.'!');
         }
         if($msg =~ /^!choose/ ){
                 $msg =~ s/!choose //;
-                $msg =~ s/\s//g; #remove extra whitespace
                 #arguments passed in as one whole string, separate them by commas and store in array
                 my @choices = split(',', $msg);
                 my $range = @choices;
+                my @fch;
+                foreach my $ch (@things){
+                  $ch =~ s/^ //;
+                  push ($ch, @fch);
+                }
                 #randomly choose a choice
                 my $random = int(rand($range)) + 0;
                 #output
-                $server->command('msg '.$target.' '.$nick.' : '.$choices[$random].'!');
+                $server->command('msg '.$target.' '.$nick.' : '.$fch[$random].'!');
         }
   }
 }
