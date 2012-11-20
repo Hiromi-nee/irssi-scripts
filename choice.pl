@@ -31,7 +31,7 @@ sub choice{
           my @fch;
           foreach my $ch (@things){
             $ch =~ s/^ //;
-            push ($ch, @fch);
+            push (@fch, $fch);
           }
           #shuffle the order of the choices
           my $response = join(', ', shuffle(@fch));
@@ -44,9 +44,9 @@ sub choice{
                 my @choices = split(',', $msg);
                 my $range = @choices;
                 my @fch;
-                foreach my $ch (@things){
+                foreach my $ch (@choices){
                   $ch =~ s/^ //;
-                  push ($ch, @fch);
+                  push (@fch, $ch);
                 }
                 #randomly choose a choice
                 my $random = int(rand($range)) + 0;
